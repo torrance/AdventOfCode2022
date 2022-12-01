@@ -1,12 +1,14 @@
 # Collate the input.txt into Vector of summed calories per elf
 rations = Int[]
 
-lines = eachline(open(joinpath(@__DIR__, "input.txt")))
-while !isempty(lines)
-    push!(
-        rations,
-        sum(x -> parse(Int, x), Iterators.takewhile(!isempty, lines))
-    )
+open(joinpath(@__DIR__, "input.txt")) do f
+    lines = eachline(f)
+    while !isempty(lines)
+        push!(
+            rations,
+            sum(x -> parse(Int, x), Iterators.takewhile(!isempty, lines))
+        )
+    end
 end
 
 calories, elfid = findmax(rations)
