@@ -2,7 +2,7 @@ using DelimitedFiles
 
 @enum Move Rock=1 Paper=2 Scissors=3
 
-# e.g. given m::Move, wins[m] will produce a winning move againsts m
+# e.g. given m::Move, wins[m] will produce a winning move against m
 # or loses[m] will produce a losing move against m
 const wins = Dict(Rock => Paper, Paper => Scissors, Scissors => Rock)
 const draws = Dict(Rock => Rock, Paper => Paper, Scissors => Scissors)
@@ -39,7 +39,7 @@ end
 println("Part 1 total points: ", points)
 
 # Part 2
-decode2 = Dict('X' => loses, 'Y' => draws, 'Z' => wins)
+const decode2 = Dict('X' => loses, 'Y' => draws, 'Z' => wins)
 
 points = sum(eachrow(strategy)) do (char1, char2)
     them = decode1[char1]
