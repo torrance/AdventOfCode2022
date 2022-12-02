@@ -2,8 +2,8 @@ using DelimitedFiles
 
 @enum Move Rock=1 Paper=2 Scissors=3
 
-# e.g. given m::Move, wins[m] will produce a winning move
-# or loses[m] will produce a losing move
+# e.g. given m::Move, wins[m] will produce a winning move againsts m
+# or loses[m] will produce a losing move against m
 const wins = Dict(Rock => Paper, Paper => Scissors, Scissors => Rock)
 const draws = Dict(Rock => Rock, Paper => Paper, Scissors => Scissors)
 const loses = Dict(Rock => Scissors, Paper => Rock, Scissors => Paper)
