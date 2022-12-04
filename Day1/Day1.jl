@@ -5,7 +5,7 @@ lines = eachline(joinpath(@__DIR__, "input.txt"))
 while !isempty(lines)
     push!(
         rations,
-        sum(x -> parse(Int, x), Iterators.takewhile(!isempty, lines))
+        sum(parse.(Int, Iterators.takewhile(!isempty, lines)))
     )
 end
 
