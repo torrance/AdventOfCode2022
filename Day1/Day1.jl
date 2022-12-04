@@ -1,14 +1,12 @@
 # Collate the input.txt into Vector of summed calories per elf
 const rations::Vector{Int} = Int[]
 
-open(joinpath(@__DIR__, "input.txt")) do f
-    lines = eachline(f)
-    while !isempty(lines)
-        push!(
-            rations,
-            sum(x -> parse(Int, x), Iterators.takewhile(!isempty, lines))
-        )
-    end
+lines = eachline(joinpath(@__DIR__, "input.txt"))
+while !isempty(lines)
+    push!(
+        rations,
+        sum(x -> parse(Int, x), Iterators.takewhile(!isempty, lines))
+    )
 end
 
 calories, elfid = findmax(rations)
