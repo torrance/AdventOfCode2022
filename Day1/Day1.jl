@@ -1,5 +1,5 @@
 # Collate the input.txt into Vector of summed calories per elf
-rations = Int[]
+const rations::Vector{Int} = Int[]
 
 open(joinpath(@__DIR__, "input.txt")) do f
     lines = eachline(f)
