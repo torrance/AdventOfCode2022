@@ -4,11 +4,11 @@ ranges = map(eachline("input.txt")) do line
 end
 
 N = count(ranges) do (first, second)
-    return issubset(first, second) || issubset(second, first)
+    return first ⊆ second || second ⊆ first
 end
 println("$(N) assignments are fully contained by another")
 
 N = count(ranges) do (first, second)
-    return length(intersect(first, second)) > 0
+    return !isempty(first ∩ second)
 end
 println("$(N) assignments overlap")
