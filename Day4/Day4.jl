@@ -1,4 +1,4 @@
-ranges = map(eachline("input.txt")) do line
+ranges = map(eachline(joinpath(@__DIR__, "input.txt"))) do line
     Is = map(x -> parse(Int, x), split(line, ('-', ',')))
     return Is[1]:Is[2], Is[3]:Is[4]
 end

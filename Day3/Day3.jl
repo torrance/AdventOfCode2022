@@ -7,7 +7,7 @@ function priority(char::Char)
     @assert false "Invalid character"
 end
 
-rucksacks = map(collect, readlines("input.txt"))  # collect expands each row into Vector{Char}
+rucksacks = map(collect, eachline(joinpath(@__DIR__, "input.txt")))  # collect expands each row into Vector{Char}
 
 # Part 1
 prioritysum = sum(rucksacks) do rucksack
