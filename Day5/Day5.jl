@@ -2,9 +2,9 @@
 stacks = [Char[] for _ in 1:9]
 
 # Populate the stacks with the initial configuration (rows 1-8, read from bottom-up)
-for line in readlines("input.txt")[8:-1:1]
+for row in Iterators.take(eachline("input.txt"), 8) |> collect |> reverse!
     # Each segment is 4 characters, with the integer value at the 2nd position
-    for (char, stack) in zip(line[2:4:end], stacks)
+    for (char, stack) in zip(row[2:4:end], stacks)
         if !isspace(char)
             push!(stack, char)
         end
@@ -13,7 +13,7 @@ end
 
 # Parse the moves (rows 11 onwards) in Vector of 3-tuples
 # e.g. [(N, src, dest), ...]
-moves = map(readlines("input.txt")[11:end]) do line
+moves = map(Iterators.drop(eachline("input.txt"), 10)) do line
     _, N, _, src, _, dest = split(line)
     return  parse.(Int, (N, src, dest))
 end
