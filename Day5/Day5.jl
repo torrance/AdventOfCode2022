@@ -31,7 +31,7 @@ println("Part 1 top row: ", String(map(last, stacks1)))
 # Part 2
 stacks2 = deepcopy(stacks)
 for (N, src, dest) in moves
-    Is = (length(stacks2[src]) - N + 1):(length(stacks2[src]))
+    Is = (length(stacks2[src]) - N + 1):length(stacks2[src])
     append!(stacks2[dest], splice!(stacks2[src], Is))
 end
 println("Part 2 top row: ", String(map(last, stacks2)))
