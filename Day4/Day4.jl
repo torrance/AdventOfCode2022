@@ -9,6 +9,6 @@ end
 println("$(N) assignments are fully contained by another")
 
 N = count(ranges) do (first, second)
-    return !isempty(first ∩ second)
+    return !isdisjoint(first, second)
 end
 println("$(N) assignments overlap")
