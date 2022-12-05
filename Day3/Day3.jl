@@ -18,9 +18,7 @@ end
 println("Part 1 sum: ", prioritysum)
 
 # Part 2
-rucksacks = reshape(rucksacks, 3, :)  # group sequential elves into triplets
-
-prioritysum = sum(eachcol(rucksacks)) do (ruck1, ruck2, ruck3)
+prioritysum = sum(Iterators.partition(rucksacks, 3)) do (ruck1, ruck2, ruck3)
     common = only(ruck1 ∩ ruck2 ∩ ruck3)
     return priority(common)
 end
