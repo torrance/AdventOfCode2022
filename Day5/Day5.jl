@@ -4,8 +4,7 @@ stacks = [Char[] for _ in 1:9]
 # Populate the stacks with the initial configuration (rows 1-8, read from bottom-up)
 for line in readlines("input.txt")[8:-1:1]
     # Each segment is 4 characters, with the integer value at the 2nd position
-    row = map(p -> getindex(p, 2), Iterators.partition(line, 4))
-    for (char, stack) in zip(row, stacks)
+    for (char, stack) in zip(line[2:4:end], stacks)
         if !isspace(char)
             push!(stack, char)
         end
