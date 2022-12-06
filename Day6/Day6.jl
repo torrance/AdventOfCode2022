@@ -1,7 +1,5 @@
 function findunique(data, N)
-    for (istart, char) in enumerate(data[N:end])
-        istop = istart + N - 1
-
+    for (istart, istop) in zip(1:length(data), N:length(data))
         if allunique(@view data[istart:istop])
             return istop
         end
