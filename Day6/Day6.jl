@@ -5,7 +5,7 @@ function findunique(data, N)
         end
     end
 
-    raise(ErrorException("No starting index found"))
+    throw(ErrorException("No starting index found"))
 end
 
 const data::Vector{Char} = collect(Char, read("input.txt"))
