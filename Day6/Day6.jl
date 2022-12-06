@@ -8,7 +8,7 @@ function findunique(data, N)
     throw(ErrorException("No starting index found"))
 end
 
-const data::Vector{Char} = collect(Char, read("input.txt"))
+const data::Vector{UInt8} = read("input.txt")
 
 # Part 1
 println("Start of packet: ", findunique(data, 4))
