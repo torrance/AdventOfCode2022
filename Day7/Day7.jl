@@ -4,7 +4,7 @@ const DIR = Dict{String, Union{FILE, Dict}}
 """
 Convert the input into a tree structure with DIR and FILE nodes
 """
-function parseinput(dir, lines)
+function parseinput!(dir, lines)
     for line in lines
         if line == "\$ ls"
             # pass
@@ -12,7 +12,7 @@ function parseinput(dir, lines)
             return
         elseif line[1:4] == "\$ cd"
             fname = line[6:end]
-            parseinput(dir[fname], lines)
+            parseinput!(get!(dir, fname, DIR()), lines)
         elseif line[1:3] == "dir"
             fname = line[5:end]
             dir[fname] = DIR()
@@ -43,9 +43,7 @@ end
 
 # Construct our filesystem tree
 root = DIR()
-lines = eachline("input.txt")
-iterate(lines)  # skip "cd /"
-parseinput(root, lines)
+parseinput!(root, eachline(joinpath(@__DIR__, "input.txt")))
 
 # Next, find sizes of all directories flattened into a vector
 dirsizes = Int[]
