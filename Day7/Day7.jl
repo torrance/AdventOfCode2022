@@ -25,20 +25,19 @@ function parseinput(dir, lines)
 end
 
 """
-Traverse the filesystem tree and calculate the total file size for each folder.
-Call function f() after summing each directory.
+Traverse the filesystem tree and enter each directory size into a flat listing
 """
-function calculatesize(f, dir)
+function dirsizes!(dirsizes, current)
     dirsize = 0
-    for (key, val) in dir
+    for (key, val) in current
         if typeof(val) == FILE
             dirsize += val
         else
-            dirsize += calculatesize(f, dir[key])
+            dirsize += dirsizes!(dirsizes, current[key])
         end
     end
 
-    f(dirsize)
+    push!(dirsizes, dirsize)
     return dirsize
 end
 
@@ -48,22 +47,15 @@ lines = eachline("input.txt")
 iterate(lines)  # skip "cd /"
 parseinput(root, lines)
 
+# Next, find sizes of all directories flattened into a vector
+dirsizes = Int[]
+used = dirsizes!(dirsizes, root)
+
 # Part 1
-part1 = Ref{Int}(0)
-used = calculatesize(root) do dirsize
-    if dirsize <= 100_000
-        part1[] += dirsize
-    end
-end
-println("Part 1 sum: ", part1[])
+part1 = filter(<=(100_000), dirsizes) |> sum
+println("Part 1 sum: ", part1)
 
 # Part 2
 tofree = 30000000 - (70000000 - used)
-
-part2 = Ref{Int}(70000000)  # Initialize to total system filesize
-calculatesize(root) do dirsize
-    if tofree < dirsize < part2[]
-        part2[] = dirsize
-    end
-end
-println("Part 2 directory size to delete: ", part2[])
+part2 = filter(>=(tofree), dirsizes) |> minimum
+println("Part 2 directory size to delete: ", part2)
