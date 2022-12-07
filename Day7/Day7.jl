@@ -29,11 +29,11 @@ Traverse the filesystem tree and enter each directory size into a flat listing
 """
 function dirsizes!(dirsizes, current)
     dirsize = 0
-    for (key, val) in current
-        if typeof(val) == FILE
-            dirsize += val
+    for child in values(current)
+        if typeof(child) == FILE
+            dirsize += child
         else
-            dirsize += dirsizes!(dirsizes, current[key])
+            dirsize += dirsizes!(dirsizes, child)
         end
     end
 
