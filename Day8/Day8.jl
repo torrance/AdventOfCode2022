@@ -14,7 +14,7 @@ visible = count(CartesianIndices(grid)) do xy
     height = grid[xy]
 
     return any(outlooks(grid, xy)) do outlook
-        return maximum(outlook; init=-1) < height
+        maximum(outlook; init=-1) < height
     end
 end
 println("Part 1: there are $(visible) visible trees")
@@ -24,8 +24,7 @@ highest = maximum(CartesianIndices(grid)) do xy
 
     return prod(outlooks(grid, xy)) do outlook
         # Note findfirst() returns nothing if it makes it to the edge of the map
-        i = findfirst(>=(height), outlook)
-        return isnothing(i) ? length(outlook) : i
+        something(findfirst(>=(height), outlook), length(outlook))
     end
 end
 println("Part 2: highest scenic score is $(highest)")
