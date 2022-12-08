@@ -8,7 +8,7 @@ function outlooks(grid, xy)
     )
 end
 
-const grid::Matrix{Int} = mapreduce(x -> parse.(Int, collect(x)), hcat, readlines("input.txt"))
+const grid::Matrix{Int} = mapreduce(x -> parse.(Int, collect(x)), hcat, eachline("input.txt"))
 
 visible = count(CartesianIndices(grid)) do xy
     height = grid[xy]
