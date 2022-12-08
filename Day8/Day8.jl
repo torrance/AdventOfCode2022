@@ -14,7 +14,7 @@ visible = count(CartesianIndices(grid)) do xy
     height = grid[xy]
 
     return any(outlooks(grid, xy)) do outlook
-        maximum(outlook; init=-1) < height
+        all(<(height), outlook)
     end
 end
 println("Part 1: there are $(visible) visible trees")
