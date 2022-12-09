@@ -3,7 +3,7 @@ const Move::Dict{String, Vector{Int}} = Dict(
 )
 
 function snake(moves, knots)
-    history = [last(knots)]  # Initialize with starting position of tail
+    history = [copy(last(knots))]  # Initialize with starting position of tail
 
     for (direction, magnitude) in moves
         for _ in 1:magnitude
