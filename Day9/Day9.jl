@@ -12,7 +12,7 @@ function snake(moves, knots)
 
             # Now iterate through tail pieces and move if needed
             for (lead, follow) in zip(knots, knots[2:end])
-                offset = [lead[1] - follow[1], lead[2] - follow[2]]
+                offset = lead - follow
 
                 if maximum(abs, offset) <= 1
                     # No need to move!
