@@ -23,7 +23,7 @@ function search(x0, y0)
 
         for (i, j) in ((x, y + 1), (x, y - 1), (x + 1, y), (x - 1, y))
             if (
-                i in axes(grid, 1) && j in axes(grid, 2) && !((i, j) in visited) &&
+                i in axes(grid, 1) && j in axes(grid, 2) && (i, j) ∉ visited &&
                 (charval(grid[i, j]) - charval(grid[x, y])) <= 1
 
             )
