@@ -83,11 +83,7 @@ println("Part 1: In row 2000000, $(part1) positions cannot contain a beacon")
 # Part 2
 # Since there's only one empty square, we only need bother searching the periphery
 # of sensor areas
-edges = union(map(sensors) do sensor
-    getedges(sensor; xmin=0, xmax=4000000, ymin=0, ymax=4000000)
-end...)
-
-for edge in edges
+for sensor in sensors, edge in getedges(sensor; xmin=0, xmax=4000000, ymin=0, ymax=4000000)
     if !sensed(sensors, edge)
         println("Part 2: Position $(edge) was not sensed; giving a tuning frequency of ", edge[1] * 4000000 + edge[2])
         break
