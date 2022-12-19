@@ -18,6 +18,7 @@ function bfs(blueprint; N::Int)
 
     for t in 1:N
         futures = empty(edges)
+        sizehint!(futures, length(edges) * 4)
 
         for (robots, bank) in edges
             for i in 1:4
@@ -42,7 +43,10 @@ function bfs(blueprint; N::Int)
             end
 
             # Case: noop (we're saving for a rainy holiday)
-            push!(futures, (robots, bank + robots))
+            # but not if we can afford every robot (that's never going to be optimal)
+            if !all(x -> canafford(bank, x), blueprint)
+                push!(futures, (robots, bank + robots))
+            end
         end
 
         edges = futures
